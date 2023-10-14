@@ -13,29 +13,21 @@ int _printf(const char *format, ...)
 {
 	int charac_count = 0;
 	va_list arguments;
-	print my_func_list[] {
+	print my_func_list[] = {
 		{"c", char_print},
 		{"s", str_print},
 		{"%", per_print},
 		{"d", int_print},
 		{"i", int_print},
-		{"b", binary_print},
-		{"p", addr_printer},
-		{"u", u_int_print},
-		{"o", oct_print},
-		{"x", hex_print},
-		{"X", heX_print},
-		{"R", ro13_print},
-		{"r", print_rev};
 		{NULL, NULL}
 	};
-
 
 	va_start(arguments, format);
 	if (format == NULL)
 	{
 		return (-1);
 	}
-	va_end;
+	charac_count += string_parser(format, my_func_list, arguments);
+	va_end(arguments);
 	return (charac_count);
 }
