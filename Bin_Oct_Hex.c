@@ -21,7 +21,10 @@ int print_binary(va_list arguments)
 		i++;
 	}
 	s = malloc((sizeof(char)) * i + 1);
+	str = malloc((sizeof(char)) * i + 1);
 	if (s == NULL)
+		return (-1);
+	if (str == NULL)
 		return (-1);
 	for (a = 0; input_num > 0; a++)
 	{
@@ -32,15 +35,13 @@ int print_binary(va_list arguments)
 		input_num /= 2;
 	}
 	s[a] = '\0';
-	str = s;
 	len = strlen(s);
 	for (b = 0; b < len; b++)
 		str[b] = s[len - b - 1];
 	str[b] = '\0';
-	if (str == NULL)
-		return (-1);
 	for (c = 0; str[c] != '\0'; c++)
 		length += write_function(str[c]);
+	free(str);
 	free(s);
 	return (length);
 }
