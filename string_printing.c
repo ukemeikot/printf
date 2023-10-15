@@ -8,7 +8,8 @@
  */
 
 int string_parser(const char *format, print my_list[], va_list arguments)
-{	int j = 0, i = 0, ret_value = 0, char_count = 0;
+{
+	int j = 0, i = 0, ret_value = 0, char_count = 0;
 
 for (i = 0; format[i] != '\0'; i++)
 {
@@ -18,7 +19,7 @@ for (i = 0; format[i] != '\0'; i++)
 		{
 		if (format[i + 1] == my_list[j].s[0])
 		{
-			ret_value += my_list[j].printers(arguments);
+			ret_value = my_list[j].printers(arguments);
 			if (ret_value == -1)
 				return (-1);
 			char_count += ret_value;

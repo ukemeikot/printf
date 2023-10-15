@@ -11,7 +11,7 @@
 
 int _printf(const char *format, ...)
 {
-	int charac_count = 0;
+	int charac_count;
 	va_list arguments;
 	print my_func_list[] = {
 		{"c", char_print},
@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	charac_count += string_parser(format, my_func_list, arguments);
+	charac_count = string_parser(format, my_func_list, arguments);
 	va_end(arguments);
 	return (charac_count);
 }
