@@ -29,4 +29,8 @@ typedef struct func_list
 } print;
 int string_parser(const char *format, print my_list[], va_list arguments);
 int print_binary(va_list arguments);
+int u_int_print(va_list arguments);
+int oct_print(va_list arguments);
+int hex_print(va_list arguments);
+int heX_print(va_list arguments);
 #endif

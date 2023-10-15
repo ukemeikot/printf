@@ -45,3 +45,138 @@ int print_binary(va_list arguments)
 	free(s);
 	return (length);
 }
+/**
+ * oct_print - prints octal numbers
+ * @arguments: the received arguments
+ * Return: the number of charcaters printed
+ */
+int oct_print(va_list arguments)
+{
+	unsigned int input, temp, length = 0;
+	int a = 0, b, c, d, len;
+	char *s, *str;
+
+	input = va_arg(arguments, unsigned int);
+	temp = input;
+	if (input == 0)
+		return (write_function('0'));
+	while (temp > 0)
+	{
+		temp /= 8;
+		a++;
+	}
+	s = malloc(sizeof(char) * a + 1);
+	str = malloc(sizeof(char) * a + 1);
+	if (s == NULL || str == NULL)
+		return (-1);
+	for (b = 0; input > 0; b++)
+	{
+		s[b] =  (input % 8) + 48;
+		input /= 8;
+	}
+	s[b] = '\0';
+	len = strlen(s);
+	for (c = 0; c < len; c++)
+		str[c] = s[len - c - 1];
+	str[c] = '\0';
+	for (d = 0; str[d] != '\0'; d++)
+		length += write_function(str[d]);
+	free(str);
+	free(s);
+	return (length);
+}
+/**
+ * hex_print - prints hexadecimal of numbers
+ * @arguments: the arguments passed to it from the variadic list
+ * Return: the number of character
+ */
+
+int hex_print(va_list arguments)
+{
+	char hex[] = "abcdef", *s, *str;
+	unsigned int number, rem, temp;
+	int a = 0, b, c, d, len, length = 0, hex_val;
+
+	number = va_arg(arguments, unsigned int);
+	temp = number;
+	if (number == 0)
+		return (write_function('0'));
+	while (temp > 0)
+	{
+		temp /= 16;
+		a++;
+	}
+	s = malloc(sizeof(char) * a + 1);
+	str = malloc(sizeof(char) * a + 1);
+	if (s == NULL || str == NULL)
+		return (-1);
+	for (b = 0; number > 0; b++)
+	{
+		rem = number % 16;
+		if (rem > 9)
+		{
+			hex_val = rem - 10;
+			s[b] = hex[hex_val];
+		}
+		else
+			s[b] = rem + 48;
+		number /= 16;
+	}
+	s[b] = '\0';
+	len = strlen(s);
+	for (c = 0; c < len; c++)
+		str[c] = s[len - c - 1];
+	str[c] = '\0';
+	for (d = 0; str[d] != '\0'; d++)
+		length += write_function(str[d]);
+	free(s);
+	free(str);
+	return (length);
+}
+/**
+ * heX_print - prints capital hexadecimal
+ * @arguments: the arguments to be passed
+ * Return: the number of printed character
+ */
+int heX_print(va_list arguments)
+{
+	char hex[] = "ABCDEF", *s, *str;
+	unsigned int number, rem, temp;
+	int a = 0, b, c, d, len, length = 0, hex_val;
+
+	number = va_arg(arguments, unsigned int);
+	if (number == 0)
+		return (write_function('0'));
+	temp = number;
+	while (temp > 0)
+	{
+		temp /= 16;
+		a++;
+	}
+	s = malloc(sizeof(char) * a + 1);
+	str = malloc(sizeof(char) * a + 1);
+	if (s == NULL || str == NULL)
+		return (-1);
+	for (b = 0; number > 0; b++)
+	{
+		rem = number % 16;
+		if (rem > 9)
+		{
+			hex_val = rem - 10;
+			s[b] = hex[hex_val];
+		}
+		else
+			s[b] = rem + 48;
+		number /= 16;
+	}
+	s[b] = '\0';
+	len = strlen(s);
+	for (c = 0; c < len; c++)
+		str[c] = s[len - c - 1];
+	str[c] = '\0';
+	for (d = 0; str[d] != '\0'; d++)
+		length += write_function(str[d]);
+	free(s);
+	free(str);
+	return (length);
+}

@@ -20,6 +20,10 @@ int _printf(const char *format, ...)
 		{"d", int_print},
 		{"i", int_print},
 		{"b", print_binary},
+		{"u", u_int_print},
+		{"o", oct_print},
+		{"x", hex_print},
+		{"X", heX_print},
 		{NULL, NULL}
 	};
 
