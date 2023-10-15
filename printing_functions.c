@@ -38,9 +38,9 @@ int str_print(va_list arguments)
 
 int int_print(va_list arguments)
 {
-	int len = 0;
+	int len;
 
-	len += print_num(va_arg(arguments, int));
+	len = print_num(va_arg(arguments, int));
 	return (len);
 }
 /**
