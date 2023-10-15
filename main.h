@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdlib.h>
 int _printf(const char *format, ...);
 int write_function(char c);
 int print_num(va_list arguments);
@@ -27,4 +28,5 @@ typedef struct func_list
 	function_pointer printers;
 } print;
 int string_parser(const char *format, print my_list[], va_list arguments);
+int print_binary(va_list arguments);
 #endif
