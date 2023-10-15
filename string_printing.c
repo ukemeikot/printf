@@ -14,10 +14,6 @@ for (i = 0; format[i] != '\0'; i++)
 {
 	if (format[i] == '%')
 	{
-		if (format[i + 1] == '\0')
-		{
-			break;
-		}
 		for (j = 0; my_list[j].s != NULL; j++)
 		{
 		if (format[i + 1] == my_list[j].s[0])
