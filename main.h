@@ -6,7 +6,7 @@
 #include <string.h>
 int _printf(const char *format, ...);
 int write_function(char c);
-int print_num(int n);
+int print_num(va_list arguments);
 typedef int (*function_pointer)(va_list);
 
 /* Printing functions prototypes*/

@@ -1,21 +1,31 @@
 #include "main.h"
 /**
  * print_num - prints interger numbers
- * @n: the integer number
+ * @arguments: the integer number
  *Return: the numbers printed
 */
 
-int print_num(int n)
+int print_num(va_list arguments)
 {
-	int len = 0;
+	int length = 0, a;
+	unsigned int number;
+	int divisor = 1;
 
-	if (n < 0)
+	a = va_arg(arguments, int);
+	if (a < 0)
 	{
-		len = write_function('-');
-		n = -n;
+		length += write_function('-');
+		number = a * (-1);
 	}
-	if (n / 10)
-		print_num(n / 10);
-	len += write_function(n % 10 + '0');
-	return (len);
+	else
+		number = a;
+	while ((number / divisor) > 9)
+		divisor *= 10;
+	while (divisor != 0)
+	{
+		length += write_function('0' + (number / divisor));
+		number %= divisor;
+		divisor /= 10;
+	}
+	return (length);
 }

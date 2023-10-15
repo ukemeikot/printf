@@ -40,7 +40,7 @@ int int_print(va_list arguments)
 {
 	int len;
 
-	len = print_num(va_arg(arguments, int));
+	len = print_num(arguments);
 	return (len);
 }
 /**
@@ -52,22 +52,4 @@ int per_print(__attribute__((unused))va_list arguments)
 {
 	write_function('%');
 	return (1);
-}
-/**
- * u_int_print - print unsigned number
- * @arguments: the arguments passed
- * Return: the length of the number printed
- */
-int u_int_print(va_list arguments)
-{
-	int len = 0;
-	int num;
-
-	num = va_arg(arguments, unsigned int);
-	if (num == 0)
-		len += write_function(num);
-	if (num < 0)
-		return (-1);
-	len += print_num(num);
-	return (len);
 }
