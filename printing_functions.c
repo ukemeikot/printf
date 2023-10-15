@@ -21,7 +21,7 @@ int str_print(va_list arguments)
 
 	if (s == NULL)
 	{
-		s = "";
+		s = "(null)";
 	}
 	while (s[a] != '\0')
 	{
