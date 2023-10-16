@@ -5,16 +5,25 @@
  * Return: the number of characters printed.
  */
 
-int print_binary(va_list arguments)
+int print_binary(va_list arguments, char *bf, int *bd)
 {
 	unsigned int input_num, temp, length = 0, i;
-	int a = 0, len, b, c;
+	int a = 0, len, b, c, tmp = 0;
 	char *s, *str;
 
 	input_num = va_arg(arguments, unsigned int);
 	temp = input_num;
 	if (input_num == 0)
-		return (write_function('0'));
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = '0';
+			*bd++;
+			return (*bd + tmp);
+		}
+	}
 	while (temp > 0)
 	{
 		temp /= 2;
@@ -40,10 +49,18 @@ int print_binary(va_list arguments)
 		str[b] = s[len - b - 1];
 	str[b] = '\0';
 	for (c = 0; str[c] != '\0'; c++)
-		length += write_function(str[c]);
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = str[c];
+			*bd++;
+		}
+	}
 	free(str);
 	free(s);
-	return (length);
+	return (*bd + tmp);
 }
 /**
  * oct_print - prints octal numbers
@@ -53,13 +70,22 @@ int print_binary(va_list arguments)
 int oct_print(va_list arguments)
 {
 	unsigned int input, temp, length = 0;
-	int a = 0, b, c, d, len;
+	int a = 0, b, c, d, len, tmp = 0;
 	char *s, *str;
 
 	input = va_arg(arguments, unsigned int);
 	temp = input;
 	if (input == 0)
-		return (write_function('0'));
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = '0';
+			*bd++;
+		}
+		return (*bd + tmp);
+	}
 	while (temp > 0)
 	{
 		temp /= 8;
@@ -80,10 +106,18 @@ int oct_print(va_list arguments)
 		str[c] = s[len - c - 1];
 	str[c] = '\0';
 	for (d = 0; str[d] != '\0'; d++)
-		length += write_function(str[d]);
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = str[d];
+			*bd++;
+		}
+	}
 	free(str);
 	free(s);
-	return (length);
+	return (*bd + tmp);
 }
 /**
  * hex_print - prints hexadecimal of numbers
@@ -142,11 +176,20 @@ int heX_print(va_list arguments)
 {
 	char hex[] = "ABCDEF", *s, *str;
 	unsigned int number, rem, temp;
-	int a = 0, b, c, d, len, length = 0, hex_val;
+	int a = 0, b, c, d, len, length = 0, hex_val, tmp = 0;
 
 	number = va_arg(arguments, unsigned int);
 	if (number == 0)
-		return (write_function('0'));
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = '0';
+			*bd++;
+		}
+		return (*bd + tmp);
+	}
 	temp = number;
 	while (temp > 0)
 	{
@@ -175,7 +218,9 @@ int heX_print(va_list arguments)
 		str[c] = s[len - c - 1];
 	str[c] = '\0';
 	for (d = 0; str[d] != '\0'; d++)
-		length += write_function(str[d]);
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_size(bf, bd, 
 	free(s);
 	free(str);
 	return (length);

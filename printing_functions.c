@@ -4,20 +4,28 @@
  * @arguments: the arguments to be printed.
  * Return: returns 1
  */
-int char_print(va_list arguments)
+int char_print(va_list arguments, char *bf, int *bd)
 {
-	write_function(va_arg(arguments, int));
-	return (1);
+	int tmp = 0;
+
+	if (*bd >= BUFFER_SIZE - 2)
+		buffer_checker(bf, bd, &tmp);
+	else
+	{
+		bf[*bd] = va_arg(arguments, int);
+		*bd++;
+	}
+	return (*bd + tmp);
 }
 /**
  * str_print - prints string to the screen
  * @arguments: the arguments to be passed
  * Return: the number of arguments printed.
  */
-int str_print(va_list arguments)
+int str_print(va_list arguments, char *bf, char *bd)
 {
 	char *s = va_arg(arguments, char *);
-	int a = 0;
+	int a = 0, tmp = 0;
 
 	if (s == NULL)
 	{
@@ -25,10 +33,16 @@ int str_print(va_list arguments)
 	}
 	while (s[a] != '\0')
 	{
-		write_function(s[a]);
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[*bd] = s[a];
+			*bd++;
+		}
 		a++;
 	}
-	return (a);
+	return (*bd + tmp);
 }
 /**
  * int_print - prints integers
@@ -36,11 +50,11 @@ int str_print(va_list arguments)
  * Return: the length printed
  */
 
-int int_print(va_list arguments)
+int int_print(va_list arguments, char *bf, char *bd)
 {
 	int len;
 
-	len = print_num(arguments);
+	len = print_num(arguments, bf, bd);
 	return (len);
 }
 /**
@@ -48,8 +62,16 @@ int int_print(va_list arguments)
  * @arguments: the arguments passed
  * Return: the number of charcters printed
  */
-int per_print(__attribute__((unused))va_list arguments)
+int per_print(__attribute__((unused))va_list arguments, char *bf, int *bd)
 {
-	write_function('%');
-	return (1);
+	int tmp = 0;
+
+	if (*bd >= BUFFER_SIZE)
+		buffer_checker(bf, bd, &tmp);
+	else
+	{
+		bf[*bd] = '%';
+		*bd++;
+	}
+	return (*bd + tmp);
 }
