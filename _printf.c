@@ -34,11 +34,9 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	printf("ukeme\n");
 	buf_idx = string(format, my_func_list, arguments, buf, &buf_idx);
-	printf("ukeme\n");
-	buf[buf_idx + 1] = '\0';
-	write(1, buf, strlen(buf));
+	buf[buf_idx] = '\0';
+	write(1, buf, buf_idx);
 	va_end(arguments);
 	return (buf_idx);
 }

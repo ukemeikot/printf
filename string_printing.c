@@ -31,7 +31,19 @@ int string(const char *format, print my_list[], va_list arg, char *b, int *a)
 		}
 		if (my_list[j].s == NULL && format[i + 1] != ' ')
 		{
-			str_help(format, &i, b, a, &tmp);
+		 	if (format[i + 1] != '\0')
+        		{
+                		if (*a >= BUFFER_SIZE - 2)
+                        		buffer_checker(b, a, &tmp);
+                		else
+                		{
+                        		b[*a] = format[i];
+                        		b[*a] = format[i + 1];
+                        		*a += 2;
+                		}
+        		}
+        		else
+                		return (-1);	
 		}
 			i += 1;
 		}
