@@ -9,9 +9,8 @@
  */
 
 int u_int_print(va_list arguments, char *bf, int *bd)
-i{
+{
 	unsigned int num, divisor = 1;
-	unsigned int length = 0;
 	int tmp = 0;
 
 	num = va_arg(arguments, unsigned int);
@@ -21,8 +20,7 @@ i{
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd] = '0';
-			*bd++;
+			bf[*bd++] = '0';
 			return (*bd + tmp);
 		}
 	}
@@ -36,8 +34,7 @@ i{
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd] = '0' + (num / divisor);
-			*bd++;
+			bf[*bd++] = '0' + (num / divisor);
 		}
 		num %= divisor;
 		divisor /= 10;

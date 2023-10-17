@@ -2,6 +2,8 @@
 /**
  * char_print - prints ccharacter to standard output
  * @arguments: the arguments to be printed.
+ * @bf: buffer
+ * @bd: buffer index
  * Return: returns 1
  */
 int char_print(va_list arguments, char *bf, int *bd)
@@ -12,17 +14,18 @@ int char_print(va_list arguments, char *bf, int *bd)
 		buffer_checker(bf, bd, &tmp);
 	else
 	{
-		bf[*bd] = va_arg(arguments, int);
-		*bd++;
+		bf[*bd++] = va_arg(arguments, int);
 	}
 	return (*bd + tmp);
 }
 /**
  * str_print - prints string to the screen
  * @arguments: the arguments to be passed
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the number of arguments printed.
  */
-int str_print(va_list arguments, char *bf, char *bd)
+int str_print(va_list arguments, char *bf, int *bd)
 {
 	char *s = va_arg(arguments, char *);
 	int a = 0, tmp = 0;
@@ -37,8 +40,7 @@ int str_print(va_list arguments, char *bf, char *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd] = s[a];
-			*bd++;
+			bf[*bd++] = s[a];
 		}
 		a++;
 	}
@@ -47,10 +49,12 @@ int str_print(va_list arguments, char *bf, char *bd)
 /**
  * int_print - prints integers
  * @arguments: the argument to be printed
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the length printed
  */
 
-int int_print(va_list arguments, char *bf, char *bd)
+int int_print(va_list arguments, char *bf, int *bd)
 {
 	int len;
 
@@ -60,6 +64,8 @@ int int_print(va_list arguments, char *bf, char *bd)
 /**
  * per_print - prints percent to the screen
  * @arguments: the arguments passed
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the number of charcters printed
  */
 int per_print(__attribute__((unused))va_list arguments, char *bf, int *bd)
@@ -70,8 +76,7 @@ int per_print(__attribute__((unused))va_list arguments, char *bf, int *bd)
 		buffer_checker(bf, bd, &tmp);
 	else
 	{
-		bf[*bd] = '%';
-		*bd++;
+		bf[*bd++] = '%';
 	}
 	return (*bd + tmp);
 }

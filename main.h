@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #define BUFFER_SIZE 1024
 int _printf(const char *format, ...);
-int write_function(char c);
-int print_num(va_list arguments);
-typedef int (*function_pointer)(va_list);
+int write_function(char *bf, int *bd);
+int print_num(va_list arguments, char *bf, int *bd);
+typedef int (*function_pointer)(va_list, char *, int *);
 
 /* Printing functions prototypes*/
 int char_print(va_list arguments, char *, int *);
@@ -17,7 +17,7 @@ int str_print(va_list arguments, char *, int *);
 int per_print(__attribute__((unused))va_list arguments, char *, int *);
 int int_print(va_list arguments, char *, int *);
 void buffer_checker(char *b, int *a, int *tmp);
-void str_help(char *formar, int *i, char *bf, char *bd);
+int str_help(const char *format, int *i, char *bf, int *bd, int *tmp);
 /**
  * struct func_list - contains all the printing
  * functions
@@ -35,4 +35,6 @@ int u_int_print(va_list arguments, char *, int *);
 int oct_print(va_list arguments, char *, int *);
 int hex_print(va_list arguments, char *, int *);
 int heX_print(va_list arguments, char *, int *);
+void binhexhelp(char *str, char *bf, int *bd, int *tmp);
+int zero(char *bf, int *bd, int *tmp);
 #endif

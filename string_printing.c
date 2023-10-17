@@ -11,12 +11,13 @@
 
 int string(const char *format, print my_list[], va_list arg, char *b, int *a)
 {
-	int j = 0, i = 0, ret_value = 0, char_count = 0, tmp = 0;
-
-for (i = 0; format[i] != '\0'; i++)
-{
-	if (format[i] == '%')
+	int j, i, ret_value, char_count, tmp;
+	
+	j = i = ret_value = char_count = tmp = 0;
+	for (i = 0; format[i] != '\0'; i++)
 	{
+		if (format[i] == '%')
+		{
 		for (j = 0; my_list[j].s != NULL; j++)
 		{
 			if (format[i + 1] == my_list[j].s[0])
@@ -30,22 +31,21 @@ for (i = 0; format[i] != '\0'; i++)
 		}
 		if (my_list[j].s == NULL && format[i + 1] != ' ')
 		{
-			str_help(format, &i, bf, bd);
+			str_help(format, &i, b, a, &tmp);
 		}
 			i += 1;
-	}
-	else
-	{
+		}
+		else
+		{
 		if (*a >= BUFFER_SIZE - 2)
 			buffer_checker(b, a, &tmp);
 		else
 		{
-			b[*a] = format[i];
-			a++;
+			b[*a++] = format[i];
+		}
 		}
 	}
-}
-	return (*a + tmp);
+	return (*a + tmp + char_count);
 }
 /**
 *str_help - string helper function
@@ -56,20 +56,21 @@ for (i = 0; format[i] != '\0'; i++)
 *Return: nothing
 */
 
-void str_help(char *format, int *i, char *bf, char *bd)
+int str_help(const char *format, int *i, char *bf, int *bd, int *tmp)
 {
 
 	if (format[*i + 1] != '\0')
 	{
-		if (*a >= BUFFER_SIZE - 2)
-			buffer_checker(b, a, &tmp);
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, tmp);
 		else
 		{
-			b[*a] = format[*i];
-			b[*a] = format[*i + 1];
-			*a += 2;
+			bf[*bd] = format[*i];
+			bf[*bd] = format[*i + 1];
+			*bd += 2;
 		}
 	}
 	else
 		return (-1);
+	return (0);
 }

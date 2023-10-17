@@ -34,7 +34,11 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	buf_idx = string_parser(format, my_func_list, arguments, buf, &buf_idx);
+	printf("ukeme\n");
+	buf_idx = string(format, my_func_list, arguments, buf, &buf_idx);
+	printf("ukeme\n");
+	buf[buf_idx + 1] = '\0';
+	write(1, buf, strlen(buf));
 	va_end(arguments);
 	return (buf_idx);
 }
