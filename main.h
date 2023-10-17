@@ -17,7 +17,7 @@ int str_print(va_list arguments, char *, int *);
 int per_print(__attribute__((unused))va_list arguments, char *, int *);
 int int_print(va_list arguments, char *, int *);
 void buffer_checker(char *b, int *a, int *tmp);
-int str_help(const char *format, int *i, char *bf, int *bd, int *tmp);
+void str_help(const char *format, int *i, char *bf, int *bd, int *tmp);
 /**
  * struct func_list - contains all the printing
  * functions

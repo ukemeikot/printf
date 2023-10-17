@@ -14,7 +14,7 @@ int char_print(va_list arguments, char *bf, int *bd)
 		buffer_checker(bf, bd, &tmp);
 	else
 	{
-		bf[*bd++] = va_arg(arguments, int);
+		bf[(*bd)++] = va_arg(arguments, int);
 	}
 	return (*bd + tmp);
 }
@@ -40,7 +40,7 @@ int str_print(va_list arguments, char *bf, int *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd++] = s[a];
+			bf[(*bd)++] = s[a];
 		}
 		a++;
 	}
@@ -76,7 +76,7 @@ int per_print(__attribute__((unused))va_list arguments, char *bf, int *bd)
 		buffer_checker(bf, bd, &tmp);
 	else
 	{
-		bf[*bd++] = '%';
+		bf[(*bd)++] = '%';
 	}
 	return (*bd + tmp);
 }

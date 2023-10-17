@@ -210,7 +210,7 @@ void binhexhelp(char *str, char *bf, int *bd, int *tmp)
 			buffer_checker(bf, bd, tmp);
 		else
 		{
-			bf[*bd++] = str[d];
+			bf[(*bd)++] = str[d];
 		}
 	}
 }
