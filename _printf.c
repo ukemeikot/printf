@@ -28,14 +28,18 @@ int _printf(const char *format, ...)
 	char buf[BUFFER_SIZE];
 	int  buf_idx = 0;
 
-
 	va_start(arguments, format);
 	if (format == NULL)
 	{
 		return (-1);
 	}
 	buf_idx = string(format, my_func_list, arguments, buf, &buf_idx);
+<<<<<<< HEAD
+=======
+	buf[buf_idx + 1] = '\0';
+>>>>>>> main
 	write(1, buf, buf_idx);
+	printf("%d\n", buf_idx);
 	va_end(arguments);
 	return (buf_idx);
 }
