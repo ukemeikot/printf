@@ -2,19 +2,23 @@
 /**
  * print_binary - prints binary numbers
  * @arguments: the arguments to be passed
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the number of characters printed.
  */
 
-int print_binary(va_list arguments)
+int print_binary(va_list arguments, char *bf, int *bd)
 {
-	unsigned int input_num, temp, length = 0, i;
-	int a = 0, len, b, c;
+	unsigned int input_num, temp, i;
+	int a = 0, len, b, tmp = 0;
 	char *s, *str;
 
 	input_num = va_arg(arguments, unsigned int);
 	temp = input_num;
 	if (input_num == 0)
-		return (write_function('0'));
+	{
+		zero(bf, bd, &tmp);
+	}
 	while (temp > 0)
 	{
 		temp /= 2;
@@ -39,27 +43,30 @@ int print_binary(va_list arguments)
 	for (b = 0; b < len; b++)
 		str[b] = s[len - b - 1];
 	str[b] = '\0';
-	for (c = 0; str[c] != '\0'; c++)
-		length += write_function(str[c]);
+	binhexhelp(str, bf, bd, &tmp);
 	free(str);
 	free(s);
-	return (length);
+	return (*bd + tmp);
 }
 /**
  * oct_print - prints octal numbers
  * @arguments: the received arguments
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the number of charcaters printed
  */
-int oct_print(va_list arguments)
+int oct_print(va_list arguments, char *bf, int *bd)
 {
-	unsigned int input, temp, length = 0;
-	int a = 0, b, c, d, len;
+	unsigned int input, temp;
+	int a = 0, b, c, len, tmp = 0;
 	char *s, *str;
 
 	input = va_arg(arguments, unsigned int);
 	temp = input;
 	if (input == 0)
-		return (write_function('0'));
+	{
+		zero(bf, bd, &tmp);
+	}
 	while (temp > 0)
 	{
 		temp /= 8;
@@ -79,28 +86,31 @@ int oct_print(va_list arguments)
 	for (c = 0; c < len; c++)
 		str[c] = s[len - c - 1];
 	str[c] = '\0';
-	for (d = 0; str[d] != '\0'; d++)
-		length += write_function(str[d]);
+	binhexhelp(str, bf, bd, &tmp);
 	free(str);
 	free(s);
-	return (length);
+	return (*bd + tmp);
 }
 /**
  * hex_print - prints hexadecimal of numbers
  * @arguments: the arguments passed to it from the variadic list
+ * @bf: buffer
+ * @bd: the buffer index
  * Return: the number of character
  */
 
-int hex_print(va_list arguments)
+int hex_print(va_list arguments, char *bf, int *bd)
 {
 	char hex[] = "abcdef", *s, *str;
 	unsigned int number, rem, temp;
-	int a = 0, b, c, d, len, length = 0, hex_val;
+	int a = 0, b, c, len, hex_val, tmp = 0;
 
 	number = va_arg(arguments, unsigned int);
 	temp = number;
 	if (number == 0)
-		return (write_function('0'));
+	{
+		zero(bf, bd, &tmp);
+	}
 	while (temp > 0)
 	{
 		temp /= 16;
@@ -127,26 +137,29 @@ int hex_print(va_list arguments)
 	for (c = 0; c < len; c++)
 		str[c] = s[len - c - 1];
 	str[c] = '\0';
-	for (d = 0; str[d] != '\0'; d++)
-		length += write_function(str[d]);
+	binhexhelp(str, bf, bd, &tmp);
 	free(s);
 	free(str);
-	return (length);
+	return (*bd + tmp);
 }
 /**
  * heX_print - prints capital hexadecimal
  * @arguments: the arguments to be passed
+ * @bf: buffer
+ * @bd: buffer index
  * Return: the number of printed character
  */
-int heX_print(va_list arguments)
+int heX_print(va_list arguments, char *bf, int *bd)
 {
 	char hex[] = "ABCDEF", *s, *str;
 	unsigned int number, rem, temp;
-	int a = 0, b, c, d, len, length = 0, hex_val;
+	int a = 0, b, c, len, hex_val, tmp = 0;
 
 	number = va_arg(arguments, unsigned int);
 	if (number == 0)
-		return (write_function('0'));
+	{
+		zero(bf, bd, &tmp);
+	}
 	temp = number;
 	while (temp > 0)
 	{
@@ -174,9 +187,30 @@ int heX_print(va_list arguments)
 	for (c = 0; c < len; c++)
 		str[c] = s[len - c - 1];
 	str[c] = '\0';
-	for (d = 0; str[d] != '\0'; d++)
-		length += write_function(str[d]);
+	binhexhelp(str, bf, bd, &tmp);
 	free(s);
 	free(str);
-	return (length);
+	return (*bd + tmp);
+}
+/**
+ * binhexhelp - code function helper
+ * @str: string
+ * @bf: buffer
+ * @bd: buffer index
+ * @tmp: temporary holder
+ * Return: nothing
+ */
+void binhexhelp(char *str, char *bf, int *bd, int *tmp)
+{
+	int d = 0;
+
+	for (d = 0; str[d] != '\0'; d++)
+	{
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, tmp);
+		else
+		{
+			bf[(*bd)++] = str[d];
+		}
+	}
 }

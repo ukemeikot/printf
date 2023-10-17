@@ -11,7 +11,6 @@
 
 int _printf(const char *format, ...)
 {
-	int charac_count;
 	va_list arguments;
 	print my_func_list[] = {
 		{"c", char_print},
@@ -26,13 +25,18 @@ int _printf(const char *format, ...)
 		{"X", heX_print},
 		{NULL, NULL}
 	};
+	char buf[BUFFER_SIZE];
+	int  buf_idx = 0;
 
 	va_start(arguments, format);
 	if (format == NULL)
 	{
 		return (-1);
 	}
-	charac_count = string_parser(format, my_func_list, arguments);
+	buf_idx = string(format, my_func_list, arguments, buf, &buf_idx);
+	buf[buf_idx + 1] = '\0';
+	write(1, buf, buf_idx);
+	printf("%d\n", buf_idx);
 	va_end(arguments);
-	return (charac_count);
+	return (buf_idx);
 }

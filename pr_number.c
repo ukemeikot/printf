@@ -2,20 +2,27 @@
 /**
  * print_num - prints interger numbers
  * @arguments: the integer number
+ * @bf: buffer
+ * @bd: buffer index
  *Return: the numbers printed
 */
 
-int print_num(va_list arguments)
+int print_num(va_list arguments, char *bf, int *bd)
 {
-	int length = 0, a;
+	int a, tmp = 0;
 	unsigned int number;
 	int divisor = 1;
 
 	a = va_arg(arguments, int);
 	if (a < 0)
 	{
-		length += write_function('-');
-		number = a * (-1);
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[(*bd)++] = '-';
+			number = a * (-1);
+		}
 	}
 	else
 		number = a;
@@ -23,9 +30,14 @@ int print_num(va_list arguments)
 		divisor *= 10;
 	while (divisor != 0)
 	{
-		length += write_function('0' + (number / divisor));
+		if (*bd >= BUFFER_SIZE - 2)
+			buffer_checker(bf, bd, &tmp);
+		else
+		{
+			bf[(*bd)++] = '0' + (number / divisor);
+		}
 		number %= divisor;
 		divisor /= 10;
 	}
-	return (length);
+	return (*bd + tmp);
 }
