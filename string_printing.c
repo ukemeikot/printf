@@ -26,6 +26,7 @@ int string(const char *format, print my_list[], va_list arg, char *b, int *a)
 					ret_value = my_list[j].printers(arg, b, a);
 					if (ret_value == -1)
 						return (-1);
+					break;
 				}
 			}
 			if (my_list[j].s == NULL && format[i + 1] != ' ')
@@ -65,7 +66,7 @@ void str_help(const char *format, int *i, char *bf, int *bd, int *tmp)
 		buffer_checker(bf, bd, tmp);
 	else
 	{
-		bf[(*bd)] = format[*(i)];
-		bf[(*bd)] = format[(*i) + 1];
+		bf[(*bd)++] = format[*(i)];
+		bf[(*bd)++] = format[(*i) + 1];
 	}
 }
