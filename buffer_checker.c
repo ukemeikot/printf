@@ -8,7 +8,6 @@
 */
 void buffer_checker(char *b, int *a, int *tmp)
 {
-	b[*a] = '\0';
 	write_function(b, a);
 	*tmp = *a;
 	*a = 0;

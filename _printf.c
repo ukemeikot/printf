@@ -35,7 +35,6 @@ int _printf(const char *format, ...)
 		return (-1);
 	}
 	buf_idx = string(format, my_func_list, arguments, buf, &buf_idx);
-	buf[buf_idx] = '\0';
 	write(1, buf, buf_idx);
 	va_end(arguments);
 	return (buf_idx);

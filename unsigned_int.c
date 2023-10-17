@@ -20,7 +20,7 @@ int u_int_print(va_list arguments, char *bf, int *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd++] = '0';
+			bf[(*bd)++] = '0';
 			return (*bd + tmp);
 		}
 	}
@@ -34,7 +34,7 @@ int u_int_print(va_list arguments, char *bf, int *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd++] = '0' + (num / divisor);
+			bf[(*bd)++] = '0' + (num / divisor);
 		}
 		num %= divisor;
 		divisor /= 10;

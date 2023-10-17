@@ -20,7 +20,7 @@ int print_num(va_list arguments, char *bf, int *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd++] = '-';
+			bf[(*bd)++] = '-';
 			number = a * (-1);
 		}
 	}
@@ -34,7 +34,7 @@ int print_num(va_list arguments, char *bf, int *bd)
 			buffer_checker(bf, bd, &tmp);
 		else
 		{
-			bf[*bd++] = '0' + (number / divisor);
+			bf[(*bd)++] = '0' + (number / divisor);
 		}
 		number %= divisor;
 		divisor /= 10;
